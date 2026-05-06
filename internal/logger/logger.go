@@ -1,8 +1,8 @@
-package log
+package logger
 
 import (
 	"encoding/json"
-	"go-net-log/internal/net"
+	"go-net-log/internal/fetcher"
 	"os"
 	"time"
 )
@@ -38,7 +38,7 @@ func (l *Logger) Close() error {
 }
 
 // Record 记录一次快照数据
-func (l *Logger) Record(d, u float64, gw, pub net.PingResult) error {
+func (l *Logger) Record(d, u float64, gw, pub fetcher.PingResult) error {
 	entry := LogEntry{
 		Timestamp:  time.Now().Format(time.RFC3339Nano),
 		DownKB:     d / 1024,

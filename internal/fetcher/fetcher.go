@@ -1,4 +1,4 @@
-package net
+package fetcher
 
 // 数据获取
 import (
