@@ -17,8 +17,10 @@ type Temp struct {
 	curPub     fetcher.PingResult
 }
 
-func Monitor(logger *logger.Logger) {
-
+func Monitor() {
+	// 1. 初始化日志器
+	logger := logger.OpenLogger()
+	defer logger.Close()
 	// 初始化通道
 	info := fetcher.NetInfo{
 		D:         make(chan float64),

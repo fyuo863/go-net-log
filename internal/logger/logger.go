@@ -2,6 +2,7 @@ package logger
 
 import (
 	"encoding/json"
+	"fmt"
 	"go-net-log/internal/fetcher"
 	"os"
 	"time"
@@ -24,12 +25,15 @@ type Logger struct {
 }
 
 // NewLogger 初始化日志文件
-func NewLogger(filename string) (*Logger, error) {
+func OpenLogger() *Logger {
+	now := time.Now()
+	filename := fmt.Sprintf("network_diag_%s.jsonl", now.Format("2006-01-02"))
 	f, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
-	return &Logger{file: f}, nil
+
+	return &Logger{file: f}
 }
 
 // Close 关闭文件
